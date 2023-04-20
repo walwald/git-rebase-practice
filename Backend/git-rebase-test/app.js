@@ -31,6 +31,7 @@ app.get('/ping', (req, res) => {
 feature/signin 브랜치의 경우 app.post('/users/signin', ...)
 feature/signup 브랜치의 경우 app.post('/users/signup', ...)
 */
+<<<<<<< HEAD
 app.post('/users/signin', async(req, res) => {
   const { email, password } = req.body
   const user = await appDataSource.query(`
@@ -51,6 +52,23 @@ app.post('/users/signin', async(req, res) => {
     return res.json({message: "INVALID_PASSWORD"})
   }
   return res.json({ userId: user.id })
+=======
+app.post('/users/signup', async(req, res)=> {
+  const { username, email, password } = req.body
+  return await appDataSource.query(`
+  INSERT INTO
+    users (
+      username,
+      email,
+      password
+    )
+    VALUES (
+      ?,
+      ?,
+      ?
+    )
+    `, [username, email, password])
+>>>>>>> 6db7bb0 (ADD: 회원가입 기능 구현 완료)
 })
 
 app.listen(PORT, () => {
